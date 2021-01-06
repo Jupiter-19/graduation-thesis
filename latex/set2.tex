@@ -1,0 +1,45 @@
+
+
+%==============================================================
+% 这部分除了“取舍”外，不需要自己修改，必要信息都已在上面设置。
+
+%封面
+\input{chapters/cover}
+%中文题名页
+\input{chapters/titlec}
+%英文题名页
+\input{chapters/titlee} % 硕士论文请根据需要取舍。
+%独创性声明
+\input{chapters/announce}
+
+\frontmatter
+\pagenumbering{Roman}
+
+%勘误页
+%\input{errata}  % 请根据需要取舍。
+%致谢
+\input{chapters/thanks}
+\newpage
+%序言
+%\input{preface} % 请根据需要取舍。
+%中文摘要
+\input{chapters/absc}
+
+%英文摘要
+\input{chapters/abse}
+
+%==============================================================
+%这部分不需要自己修改。
+
+%插图和附表清单
+\listoffigures
+\chaptermark{图目录}
+\addcontentsline{toc}{chapter}{图目录}
+\listoftables
+\chaptermark{表目录}
+\addcontentsline{toc}{chapter}{表目录}
+
+%术语表
+% \printnomenclature
+% \chaptermark{术语表}
+%目次页

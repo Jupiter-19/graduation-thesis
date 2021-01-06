@@ -1,0 +1,38 @@
+%% 英文摘要
+\chapter*{\centerline{Abstract}}
+\chaptermark{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\vspace{1em}
+\begin{normalsize}
+% 本文研究带守恒量的随机自治微分方程的数值解，分别从单条样本轨道的解和整体的概率解的角度进行分析. 
+This paper studies the numerical solutions of stochastic autonomous differential equations with conserved quantities, and analyzes them from the perspective of the numerical solution of a single sample path and the probability solution.
+%本文首先介绍随机偏微分方程的理论基础和经典的数值算法，包括 Euler-Maruyama 格式、Milstein 格式和 Taylor 格式，这部分的讨论与确定性偏微分方程是很不一样的，这是因为随机偏微分方程的解具有概率意义，且每条样本轨道是无界变差函数. 
+Firstly, this paper introduces the theoretical basis and classical numerical schemes of stochastic partial differential equations, including Euler-Maruyama scheme, Milstein scheme and Taylor scheme. The discussion in this part is very different from deterministic partial differential equations. This is because of the solution of stochastic partial differential equation having probabilistic meaning, and each sample path performing an unbounded variation function.
+
+
+%对于长时间演化的问题，本文分析了一维情况在满足某些条件时，存在唯一的稳定解，并给出了高效的加速算法. 对于带守恒量的问题，本文介绍离散梯度格式和投射方法，这两种方法均能在保证误差精度的前提下保持守恒量不变. 
+For the problem of long-term evolution, this paper analyzes the one-dimensional case when certain conditions are met, there is a unique stable solution, and gives an efficient acceleration algorithm. For the problem with conserved quantities, this article introduces the discrete gradient scheme and projection method. Both of these methods can keep the conserved quantity unchanged while ensuring the accuracy of the error.
+%值得注意的是，离散梯度格式仅能处理带单一守恒量的问题，而投射方法可以处理带多个守恒量的问题. 
+It is worth noting that the discrete gradient format can only handle problems with a single conserved quantity, while the projection method can handle problems with multiple conserved quantities.
+
+%本文对投射方法做了改进，原先论文的投射方向选取为垂直方向，并不具有唯一性，导致迭代点可能出现不在守恒量对应的流形上的情况. 本文的投射方法选取为距离最近的方向，保证了迭代点的守恒量不变，且使用拉格朗日乘数法，操作方便快捷. 
+This paper has improved the projection method. The projection direction of the original paper was chosen as the vertical direction, which is not unique, resulting in the iterative point may not be on the manifold corresponding to the conserved quantity. The projection method in this paper is chosen as the closest direction, to ensure that the conserved quantity of the iteration point remains unchanged. And using Lagrangian multiplier method, the operation is convenient and fast.
+
+
+%对于带守恒量的问题，本文注意到随机自治微分方程可能存在多个稳定解，且稳定解与守恒量相对应. 结合离散梯度格式和投射方法，本文提出了对稳定解不唯一的随机自治微分方程的稳定解的加速算法. 
+For problems with conserved quantities, this paper notices that there may be multiple stable solutions for stochastic autonomous differential equations, and the stable solutions correspond to the conserved quantities. Combining the discrete gradient scheme and projection method, this paper proposes an accelerated algorithm for stable solutions of stochastic autonomous differential equations with non-unique stable solutions. 
+
+%在最后的数值实验部分，本文验证经典数值格式的收敛阶和稳定解的加速算法. 并探究带单一守恒量的二维随机 Kubo oscillator 方程和带多个守恒量的三维随机 Lotka Volterra 方程. 通过一系列的数值实验加深对这两个随机系统的解的认识. 
+In the final numerical experiment part, this paper verifies the convergence order of the classical numerical scheme and the acceleration algorithm for stable solutions. This paper also explores the two-dimensional Kubo oscillator equation with a single conserved quantity and the three-dimensional Lotka-Volterra equation with multiple conserved quantities. Deepen the understanding of the solutions of these two stochastic systems through a series of numerical experiments.
+
+\vspace{1em}
+
+\textbf{Keywords:}~~
+Stochastic Autonomous Differential Equation; 
+Milstein Scheme; 
+Probability Solution; 
+Conserved Quantities; 
+Acceleration algorithm; 
+
+\end{normalsize}

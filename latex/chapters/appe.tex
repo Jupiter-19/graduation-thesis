@@ -1,0 +1,274 @@
+% !TeX encoding = UTF-8
+\chapter{附录}
+\section*{部分实验代码}
+\subsection*{3.2节 Euler格式的python代码}
+
+\scriptsize{
+\begin{lstlisting}[style=styleP]
+'''
+d X = bX dt + sigma X dB
+方程参数: X0,b,sigma
+时间参数：T
+格式参数：h
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+
+class Euler():
+	def __init__(self,X0,b,sigma,h,T):
+		self.X0 = X0
+		self.b,self.sigma = b,sigma
+		self.h,self.T = h,T
+		self.set_para()
+
+	def set_para(self):
+		self.N = int(self.T / self.h)
+		self.sqrt_h = np.sqrt(self.h)
+		self.t = [self.h * i for i in range(self.N+1)]
+	
+	def sample(self , myplot = 0):
+		self.Brown = np.random.normal(0 , 1, self.N) * self.sqrt_h
+		X = [self.X0 for i in range(self.N+1)]
+		
+		for i in range(self.N):
+			X[i+1] = X[i] + self.b * X[i] * self.h + self.sigma * X[i] * self.Brown[i]
+		
+		if myplot:
+			plt.figure(figsize=(20,10))
+			plt.plot(self.t,X)
+		
+		real = self.X0 * np.exp((self.b-self.sigma**2/2)*self.T+self.sigma*np.sum(self.Brown))
+		return (X[-1] , real)
+	
+	def test(self):
+		EX = self.X0 * np.exp(self.b * self.T)
+		DX = (self.X0**2 * np.exp(2*self.b*self.T) * (np.exp(self.sigma**2*self.T)-1))
+
+		result,error = [],[]
+		for i in range(10000):
+			calc,real = self.sample()
+			result.append(calc)
+			error.append(real-calc)
+		
+		m_mean,m_std = np.mean(result),np.std(result) 
+		print(EX , DX , '\n' , m_mean , m_std ** 2)
+		print(np.mean(error) , np.std(error)**2)
+		
+		result = [ x for x in result if x > m_mean-5*m_std and x < m_mean + 5*m_std]
+		plt.hist(result,bins = 100)
+
+method = Euler(X0 = 2 , b = -2, sigma = 2 , h = 1e-4 , T = 5)
+method.sample(myplot = 1)
+method.test()
+\end{lstlisting}
+}
+
+
+
+\subsection*{4.2节代码}
+\scriptsize{
+\begin{lstlisting}[style=styleP]
+'''
+方程：dX = bx dt + sqrt(2)*(1-x**2) dB
+固定参数：b
+可变参数：T
+精度参数：h,格式
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+
+class Stable():
+	def __init__(self,b,h,T):
+		self.b = b
+		self.h = h
+		self.T = T
+		self.set_para()
+
+	def set_para(self):
+		self.N = int(self.T / self.h)
+		self.sqrt_h = np.sqrt(self.h)
+		self.sqrt_2 = np.sqrt(2)
+		self.t = [self.h * i for i in range(self.N+1)]
+
+	def sample(self,myplot = 0):
+		self.Brown = np.random.normal(0 , 1, self.N) * self.sqrt_h
+		X = [0 for i in range(self.N+1)]
+		
+		tmp = np.random.normal(0,0.2)
+		while np.abs(tmp) >= 1:
+			tmp = np.random.normal(0,0.2)
+		X[0] = tmp        
+			
+		
+		for i in range(self.N):
+		# Milstein 格式
+		X[i+1] = X[i] + self.b * X[i] * self.h + self.sqrt_2 * (1-X[i]**2) * self.Brown[i]
+		X[i+1]+= (self.Brown[i]**2 - self.h) * 2 * X[i] * (X[i]**2-1)
+		
+		if X[i+1] > 1: X[i+1] = (X[i]+1) / 2
+		if X[i+1] <-1: X[i+1] = (X[i]-1) / 2
+		
+		if myplot:
+			plt.figure(figsize=(20,10))
+			plt.plot(self.t,X)
+		
+		return X[-1]
+
+	def measure(self):
+		result = []
+		for idx in range(500000):
+			if idx % 20000 == 0: print(idx//5000+4)
+			result.append(self.sample())
+			
+		plt.figure(figsize=(18,9))
+		plt.xlim(-1,1)
+		plt.hist(result , bins = 250)
+		plt.show()
+
+m = Stable(b = -2 , h = T/1000 , T = 1.0)
+#m.sample(myplot=1)
+m.measure()
+\end{lstlisting}
+}
+
+
+
+
+
+
+\newpage
+
+\subsection*{TaylorP格式下Kubo-oscillator 方程稳定解算法}
+\scriptsize{
+\begin{lstlisting}[style=styleP]
+import os 
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+class Kubo():
+	def __init__(self):
+		self.b, self.sigma = 2,2
+		self.h = 1e-2
+		self.T = 80
+	
+	# 数据分布演化 num 次 
+	def scheme(self,oldx,oldy,num):
+		length = len(oldx)
+		b,sigma,h = self.b , self.sigma, self.h
+	
+		newx,newy = [],[]
+		for k in range(length):
+			# 第 k 个点的模拟
+			tx = [oldx[k] for _ in range(num+1)]
+			ty = [oldy[k] for _ in range(num+1)]
+			Brown = np.random.normal(0 , 1, self.N) * np.sqrt(self.h)
+			for i in range(num):
+				# Taylor格式
+				tx[i+1] = tx[i] - b*ty[i]*h - sigma*ty[i]*Brown[i] - sigma**2*tx[i]/2*Brown[i]**2
+				tx[i+1] +=(Brown[i]**3-3*h*Brown[i])/6 * sigma**3*ty[i]
+				tx[i+1] +=(sigma**4/4*tx[i]-sigma**2*b*ty[i]-b**2*tx[i])/2*h*h
+				tx[i+1] -= Brown[i]*h*(sigma**3/2*ty[i]+b*sigma*tx[i])
+				ty[i+1] = ty[i] + b*tx[i]*h + sigma*tx[i]*Brown[i] - sigma**2*ty[i]/2*Brown[i]**2
+				ty[i+1] -=(Brown[i]**3-3*h*Brown[i])/6 * sigma**3*tx[i]
+				ty[i+1] +=(sigma**4/4*ty[i]+sigma**2*b*tx[i]-b**2*ty[i])/2*h*h
+				ty[i+1] += Brown[i]*h*(sigma**3/2*tx[i]-b*sigma*ty[i])
+				# 投射操作
+				tmp = np.sqrt(tx[i+1]**2 + ty[i+1]**2)
+				tx[i+1],ty[i+1] = tx[i+1]/tmp,ty[i+1]/tmp
+
+			newx.append(tx[-1])
+			newy.append(ty[-1])
+		
+		return newx,newy
+	
+	def test(self):
+		num = int(0.2 / self.h)
+		
+		for n in range(1,int(self.T/0.2)+1):
+			time = str(n*2//10).zfill(2)+'.'+str(n*2%10)
+			print(time)
+			if 'T='+time+'.csv' in os.listdir('D:\data\Kubo\point'):
+				data = pd.read_csv('D:\data\Kubo\point\T='+time+'.csv')
+				x = list(data['x'])
+				y = list(data['y'])
+				continue
+		
+			x,y = self.scheme(x,y,num)
+			out = pd.DataFrame({'x':x , 'y':y})
+			out.to_csv('D:\data\Kubo\point\T='+time+'.csv')
+			
+			plt.hist(x,bins = 100)
+			plt.savefig('D:\data\Kubo\histX\T='+time+'.png')
+			plt.show()
+			
+			plt.hist(y,bins = 100)
+			plt.savefig('D:\data\Kubo\histY\T='+time+'.png')
+			plt.show()
+			
+			plt.figure(figsize=(8,8))
+			plt.scatter(x[:100],y[:100])
+			plt.show()
+
+k = Kubo()
+k.test()
+\end{lstlisting}
+}
+
+
+
+
+
+
+
+\section*{\ito 积分、Stratonovich积分下的二次变差项}
+随机积分中，积分表达式 $\displaystyle \int B_t \md B_t$ 会多次出现. 同时注意到，本文的理论与数值格式中，$\frac12 \Delta B_t^2$ 这类二次变差项也会反复出现. 且在\ito 积分、Stratonovich积分下正负号正好相反. 此处简要计算说明. 
+\[
+\begin{aligned} 
+S_{n}&=\sum_{i=0}^{n-1} B\left(t_{i}^{n}\right)\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right] \\
+&=
+\sum_{i=0}^{n-1} \frac{B\left(t_{i+1}^{n}\right)+B\left(t_{i}^{n}\right)}{2}\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right] 
+-\sum_{i=0}^{n-1} \frac{B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)}{2}\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right]\\
+&=\frac12 B(T)^2 - \frac12 \sum_{i=0}^{n-1}\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right]^{2} 
+\longrightarrow \frac12 B(T)^2 - \frac12 T.\\
+S^{\prime}_n&=\sum_{i=0}^{n-1} B\left(t_{i+1}^{n}\right)\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right]
+\longrightarrow \frac12 B(T)^2 + \frac12 T.\\
+S_n''&=\sum_{i=0}^{n-1} \frac{B\left(t_{i+1}^{n}\right)+B\left(t_{i}^{n}\right)}{2}\left[B\left(t_{i+1}^{n}\right)-B\left(t_{i}^{n}\right)\right] = \frac12 B(T)^2
+\end{aligned}
+\]
+第一种情况对应 \ito 积分意义，第二中情况对应 Stratonovich 积分意义. 
+
+
+\iffalse
+
+
+\begin{shaded}
+	积分表计算：文献\cite{integer}
+\end{shaded}
+
+
+\section*{积分表}
+下面的积分表用于数值积分的推导
+\begin{table}[!htbp]
+\caption{随机积分表}
+\centering
+\begin{tabular}{c|c||c|c}
+	\ito 积分表达式 & 值 & Stratonovich 积分 & 值 \\
+	\hline
+	\rule{0pt}{15pt}$\int_t^{t+h} \md B_s$  & $\Delta B$  & 
+		$\int_t^{t+h} \circ \md B_s$  & $\Delta B$   \\
+	\rule{0pt}{15pt}$\int_t^{t+h} \int_t^s \md B_\theta \md s $ & $\Delta Z$ & 
+		$\int_t^{t+h} \int_t^s \circ \md B_\theta \md s $ & $\Delta Z$ \\
+	\rule{0pt}{15pt} $\int_t^{t+h}\int_t^s \md \theta \md B_s $ & $\Delta B \cdot h - \Delta Z$ &
+		$\int_t^{t+h}\int_t^s \md \theta \circ\md B_s $ & $\Delta B \cdot h - \Delta Z$ \\
+	\rule{0pt}{15pt} $\int_t^{t+h} \int_t^s \md B^1_\theta \md B^2_s$
+\end{tabular}
+\end{table}
+
+\fi
+
+
+
+
+
+

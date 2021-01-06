@@ -1,0 +1,318 @@
+% !TeX encoding = UTF-8
+\chapter{预备知识}\label{chap2}
+本章介绍随机分析的基础知识，这些知识辅助我们去理解相较于确定性的偏微分方程，随机微分方程的解构成一个$\sigma$代数，其中的元素为概率测度. 
+
+\section{随机过程：域流、布朗运动和鞅}
+设 $(\Omega,\mathcal F)$ 为可测空间，三元组 $(\Omega,\mathcal F,P)$ 是一个完备的概率空间，我们在此基础上定义随机变量.
+\begin{definition}[随机变量，Random variables]
+	给定两个可测空间 $(\Omega,\mathcal F)$ 和 $(\Omega^\prime,\mathcal F^\prime)$，一个映射 $X:\Omega \to \Omega^\prime$ 是 $\mathcal F/\mathcal F^\prime $-可测的，如果 $\mathcal F^\prime$-可测集的原像为 $\mathcal F$-可测集，即
+	\[
+	A^\prime \in {\mathcal F}^{\prime} {\Rightarrow} \{ \omega : X(\omega) \in A^ \prime \} \in \mathcal F.
+	\]
+\end{definition}
+
+随机过程是一族取值在可测集 $\mathcal X$ 上的随机变量 $X = (X_t)_{t\in \mathbb T}$，由时间 $t$ 为指标. 时间参数 $t$ 涉及到一个动态的观点：在建模未来的事件时，时间越长，则事件 $\Omega$ 的不确定性累计并扩散，变得越来越不确定. 而随着时间的流失，人们获得越来越多的信息，未来某个时间点的不确定性越来越少. 
+
+为了细致刻画不同时间的信息量，我们引入了一族递增的子$\sigma$代数 $\{\mathcal F_t\}_{t\in \mathbb T}$，称为域流. 
+\begin{definition}[域流，Filtration]  
+	给定完备概率空间 $(\Omega,\mathcal F,P)$，称$\mathcal F$ 上的递增$\sigma$代数 $\mathbb F = (\mathcal F_t)_{t \in \mathbb T}$ 为域流，若其满足 $\mathcal F_s \subset \mathcal F_t$, $\forall~0\le s \le t$. 
+\end{definition}
+
+$\mathcal F_t$ 可以解释为在 $t$ 时刻的信息，其随时间的推移增加. 我们想知道在 $\mathcal F_t$ 中观察到的事件首次发生时间 $\tau(\omega)$ 是否仅与观察到的信息流 $\mathcal F_t$ 有关. 这就导出停时的概念. 
+\begin{definition}[停时，Stopping time]
+	随机变量 $\tau: \Omega \to [0,\infty]$ 称为停时，若对于所有 $t\in \mathbb T$
+	\[
+	\{\tau \le t\} := \{ \omega \in \Omega : \tau(\omega) \le t \} \in \mathcal F_t.
+	\]
+\end{definition}	
+
+取$\mathbb T$为离散时间，常见的随机过程有 Poisson 过程、Markov链等. 对于连续的时间区间，随机过程的基本例子为布朗运动. 
+\begin{definition}[标准布朗运动，Standard Brownian motion]
+	$\mathbb T$上的标准 $m$ 维布朗运动为 $\R^m$ 上的连续随机过程 $(B_t)_{t\in \mathbb T} = (B_t^1,\cdots,B_t^m)_{t\in \mathbb T}$ 满足：
+	\begin{enumerate}
+		\item 初始值：$B_0=0$.
+		\item 独立增量：$\forall ~0\le s < t$，$B(t)-B(s)$ 与 $B(s)$ 相互独立. 
+		\item 平稳增量：$\forall ~0\le s < t$，$B(t)-B(s)$ 与 $B(t-s)$ 同分布. 
+		\item 正态分布：$\forall ~t>0$，$B(t) \sim N(0,I_m~t)$.
+	\end{enumerate}
+\end{definition}
+
+进一步地，我们考虑连续时间鞅的定义.
+
+\begin{definition}[鞅，Martingale]
+	假设 $X=(X(t))_{t\in \mathbb T}$ 是一族随机变量，$\{\mathcal F_t\}_{t\in \mathbb T}$ 是一族单调不减的子$\sigma$代数. 如果下列条件满足：
+	\begin{enumerate}
+		\item 对每个 $t\ge0$，$E|X(t)|<\infty$.
+		\item 对每个 $t\ge0$，$X(t) \in \mathcal F_t$.
+		\item $\forall ~0\le s < t$，
+		\[
+			E(X(t) | \mathcal F_s) =X(s),\qquad \mathrm{a.s.}		
+		\]
+	\end{enumerate}
+	称 $(X(t) , \mathcal F_t)_{t\in \mathbb T}$ 是鞅. 
+\end{definition}
+
+关于鞅，还有很多可以继续展开的点，如：半鞅、局部鞅、可料过程、Doob-Meyer分解，见文献 \cite{book1}.
+
+
+
+\section{不等式}
+随机分析中的误差估计，往往要涉及二次变差和求期望，因此难度很大，在介绍常用的不等式之前，首先引入符号：
+\[
+	\left<M, N\right>_{t}=\lim _{n \rightarrow+\infty} \sum_{i=1}^{k_{n}}\left(M_{t_{i}^{n}}-M_{t_{i-1}^{n}}\right)\left(N_{t_{i}^{n}}-N_{t_{i-1}^{n}}\right)
+\]
+不难得到对应的极化恒等式：
+\[
+	\left< M,N \right> = \frac12 \bigl( \left< M+N,M+N\right> - \left< M,M\right> -  \left< N,N\right>  \bigl).
+\]
+这里我们将 $\left<M,M\right>$ 简单记作 $\left<M\right>$. 例如，对于 $m$ 维 Brown 运动 $B = (B^1,\cdots,B^m)$，我们有
+\[
+	\left< B^i, B^j \right>_t = \delta_{ij} t.
+\]
+基于该符号，引入随机积分下的柯西不等式：
+\begin{proposition}[Kunita-Watanabe不等式\cite{book1}]
+	令 $M,N$ 为连续局部鞅，$\alpha,\beta$ 是 $\mathbb T\times \Omega$ 上的积$\sigma$代数 $\mathcal B(\mathbb T) \otimes \mathcal F$ 上的可测过程，则对任意 $t\in\mathbb  T$,
+	\[
+	\int_{0}^{t}\left|\alpha_{s}\right|\left|\beta_{s}\right| d~|\left<M, N\right>|_{s} \leq\left(\int_{0}^{t} \alpha_{s}^{2} d\left<M, M\right>_{s}\right)^{\frac{1}{2}}\left(\int_{0}^{t} \beta_{s}^{2} d\left<N, N\right>_{s}\right)^{\frac{1}{2}} \qquad \mathrm{a.s.}
+	\]
+\end{proposition}
+
+在对误差上界估计时，以下两个不等式也非常常见. 
+\begin{proposition}[Burkholder-Davis-Gundy不等式\cite{book1}]
+	对任意 $p>0$，存在正常数 $c_p$ 和 $C_p$，使得对任意连续局部鞅 $M=(M_t)_{t\in\mathbb T}$ 和停时 $\tau$，有
+	\[
+	c_{p} E\left[\left<M\right>_{\tau}^{p / 2}\right] \leq E\left[\sup _{0 \leq t < \tau}\left|M_{t}\right|\right]^{p} \leq C_{p} E\left[\left<M\right>_{\tau}^{p / 2}\right]
+	\]
+\end{proposition}
+
+
+%\begin{proposition}[Doob不等式]
+%	对于任意停时 $\tau$ 和非负鞅或半鞅过程 $(X_t)_{t\in \mathbb T}$，有
+%	\[
+%	\begin{aligned}
+%	&P\left[\sup _{0 \leq t \leq \tau}\left|X_{t}\right| \geq \lambda\right]  \leq \frac{E\left|X_{\tau}\right|}{\lambda}, \quad \forall \lambda>0 \\
+%	&E\left[\sup _{0 \leq t \leq \tau}\left|X_{t}\right|\right]^{p}  \leq\left(\frac{p}{p-1}\right)^{p} E\left[\left|X_{\tau}\right|^{p}\right], \quad \forall p>1
+%	\end{aligned}
+%	\]
+%\end{proposition}
+
+
+在确定性的偏微分方程的误差估计中，经常要使用到 Gronwall 不等式，而 SDE 的误差估计中，同样要频繁地使用到它
+\begin{lemma}[Gronwall不等式\cite{SEE}]
+	令 $g$ 是 $\R_+$ 上的连续正函数，且有
+	\[
+	g(t) \le h(t) + C\int_0^t g(s) \md (s), \qquad 0 \le t \le T,
+	\]
+	则有估计式：
+	\[
+	g(t) \le h(t) + C\int_0^t h(s) e^{C(t-s)} \md s,\qquad 0 \le t \le T.
+	\]
+\end{lemma}
+
+\section{随机积分}
+随机积分的出发点是构造半鞅过程的微积分，由于其常规意义下的微分和积分不存在.为了克服无界变差引起的 Riemann-Stieltjes 积分不收敛的问题\cite{book_suiji}，文献中出现多种方式定义积分 $\displaystyle\int_0^t f(s) \md B_s$. \ito 和 Stratonovich 是其中最为重要的两种方式. 
+
+假设 $\bm{f} = (f(t),0\leq t \le T)$ 是非随机有界变差函数，那可以利用分部积分的方式定义随机积分
+\[
+	\int_0^t f(s) \md B(s) = B(t)f(t) - \int_0^t B(s) \md f(s),
+\]
+这里的 $\displaystyle\int_0^t B(s) \md f(s)$ 是 Brown 运动关于 $f$ 的 Riemann-Stieltjes 积分. 现在考虑带随机项的 $\bm{f}$，对随机过程 $\bm{f}=(f(t),0\leq t \le T)$ 做如下假设：
+\begin{enumerate}
+	\item[(H1)] 可测性：$f(\omega,t) : \Omega \times [0,T] \mapsto \R$ 关于 $\mathcal F_T \times \mB([0,T])$ 是可测的，即对 $\R$ 上的任意 Borel 集合 $B$，有
+		\[
+		\{(\omega,t) : f(\omega,t) \in B\}  \in \mathcal F_T \times \mB([0,T])];
+		\] 
+	\item[(H2)] 适应性：$\bm{f}$ 关于 Brown 运动 $B$ 是适应过程，即对每个 $t$ 和 $\R$ 上的任意 Borel 集 $B$，有
+		\[
+		\{\omega : f(\omega,t) \in B\}  \in \mathcal F_t;
+		\] 
+	\item[(H3)] 可积性：$\bm{f}$ 是二阶矩过程，且
+		\[
+		\int_0^T E f(t)^2 \md t < \infty.
+		\]
+\end{enumerate}
+
+\begin{lemma} 
+	令
+	\[
+	\mH = \{ f(\omega,t): \text{满足~(H1)\ --\ (H3)} \},
+	\]
+	并定义
+	\[
+	\left< f,g \right>_\mH = \int_0^T E(f(t)g(t)) \md t,\qquad \forall ~ f,g, \in \mH.
+	\]
+	那么 $( \mH,\left< \cdot,\cdot \right> )_\mH$ 是 Hilbert 空间. 进而，定义 $\| f \| _\mH = \left< f,f \right >_\mH$，那么 $(\mH,\|\cdot\|_\mH)$ 是 Banach 空间.  
+\end{lemma}
+
+类似于 Lebesgue 积分的定义方式，我们构造对应的初等随机过程. 称 $\bm{f} = (f(t) , 0 \leq t \leq T)$ 为初等随机过程，若存在 $0=t_0\le t_1 < t_2 < \cdots < t_m = T$， 以及随机变量 $\xi_0,\xi_1,\cdots,\xi_{m-1}$ 使得 $\xi_i \in \mF _{t_i}, E\xi_i^2 < \infty$ 并且
+\[
+	f(t) = \sum_{i=0}^{m-1} \xi_i ~ \bm{1}_{(t_i,t_{i+1}]} . 
+\]
+
+令 $\mH_0$ 为所有初等随机过程所组成的空间，假设 $f \in \mH_0$，定义 
+\[
+I(f) = \sum_{i=0}^{m-1} \xi_i (B(t_{i+1}) - B(t_i)).
+\]
+这边引导出的是 \ito 型积分，而如果设置为区间的右端点，即将 $\xi_i$ 改为 $\xi_{i+1}$，则引导向 Stratonovich 积分. 
+
+\begin{lemma}
+	$I(f)$ 具有下列性质：
+	\begin{enumerate}
+		\item 可加性：对任意 $f,g \in \mH_0$，
+			\[ I(f+g)=I(f)+I(g); \]
+		\item 零均值：对任意 $f\in \mH_0$，
+			\[ EI(f) = 0;  \]
+		\item 等距性质：对任意 $f\in \mH_0$，
+			\[ E(I(f))^2 = \int_0^T E(f(t))^2 \md t. \]
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	仅证明3. 由于 $\xi_i\in \mF_{t_i}$，所以与 $B(t_{i+1}) - B(t_i)$ 独立. 并且，对于 $i \neq j$
+	\[
+		E[ \xi_i (B(t_{i+1} - B(t_i)) \xi_j (B(t_{j+1} - B(t_j)) ] = 0. 
+	\]
+	于是，有
+	\[
+	\begin{aligned}
+	E(I(f))^2 &=  E \left[ \sum_{i=0}^{m-1} \xi_i (B(t_{i+1} - B(t_i)) \right] ^2 
+		 =\sum_{i=0}^{m-1} E \left[ \xi_i^2 (B(t_{i+1} - B(t_i))^2 \right] \\
+		&=\sum_{i=0}^{m-1} E \xi_i^2 E(B(t_{i+1} - B(t_i))^2 
+		 =\sum_{i=0}^{m-1} E \xi_i^2 (t_{i+i} - t_i) = \int_0^T E(f(t))^2 \md t.
+	\end{aligned}
+	\]
+\end{proof}
+等距性质在处理随机积分时非常重要，有
+\[ \|I(f)\|_2 = \|f\|_\mH \]
+通过它，将 $I(f)$ 拓展到 $\mH$ 上. 下面引理表明 $\overline{\mH_0} = \mH$.
+\begin{lemma}
+	任给 $f\in \mH$，存在一列 $f_n \in \mH_0$ 使得当 $n\to \infty$ 时，
+	\[ \| f_n-f\|_\mH \to 0. \]
+\end{lemma}
+因而存在随机变量 $I(f)$，使得
+	\begin{equation} \label{eq1.2.1}
+		\lim_{n\to\infty} \|I(f_n) - I(f) \|_\mH = 0. 
+	\end{equation}
+称由(\ref{eq1.2.1})定义的 $I(f)$ 为 $f$ 关于Brown运动的积分. $I(f)$ 与序列 $\{f_n\}$ 的选择无关，并且在 $\mH$ 中具有可加性、零均值、等距性质. 由此，随机积分有如下推论：
+\begin{cor}
+	令 $f:\R \to \R$ 是非随机连续函数，那么对任意给定的 $t\ge 0$，
+	\begin{enumerate}
+		\item $\displaystyle \int_0^T f(B_s) \md B_s = \lim_{n\to\infty} \sum_{i=1}^n f(B_{t_{i-1}}) (B_{t_i} - B_{t_{i-1}})$;
+		\item $\displaystyle \int_0^T f(s) \md B_s  = \lim_{n\to\infty} \sum_{i=1}^n f(t_i^*) (B_{t_i} - B_{t_{i-1}})$,\quad $t_i^* \in  [ t_{i-},t_i ] $.
+	\end{enumerate}
+\end{cor}
+
+通过划分、取点、求和、取极限的方式计算 \ito 积分非常麻烦， 因此引入下面的重要公式. 
+
+\begin{lemma}[\ito 公式\cite{book_suiji}]
+	\[
+	\begin{aligned}
+	f\left(t, X_{t}\right)=f\left(0, X_{0}\right)&+\int_{0}^{t} \frac{\partial f}{\partial t}\left(u, X_{u}\right) \md u+\sum_{i=1}^{d} \int_{0}^{t} \frac{\partial f}{\partial x_{i}}\left(u, X_{u}\right) \md X_{u}^{i} \\
+	&+\frac{1}{2} \sum_{i, j=1}^{d} \int_{0}^{t} \frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}\left(u, X_{u}\right) \md \left<X^{i}, X^{j}\right>_{u}
+	\end{aligned}
+	\]
+\end{lemma}
+
+与微积分学中的 Newton-Leibniz 公式比较，\ito 公式出现二次变差项，这是Brown运动无界变差引起的. 
+
+
+\section{随机微分方程}
+固定概率空间 $(\Omega,\mF,\mathbb F=(\mF_t)_{t\in T},P)$ 和 $\mathbb F$ 对应的 $m$ 维Brown运动 $B = (B^1,\cdots,B^m)$. 给定函数 $b(t,x,\omega) = (b_i(t,x,\omega))_{1 \le i \le m}$ 和 $\sigma(x,t,\omega) = (\sigma_{ij}(t,x,\omega))_{1\le i\le d , 1\le j \le m}$. 且对任意 $\omega$，函数 $b(\cdot,\cdot,\omega)$ 和 $\sigma(\cdot,\cdot,\omega)$ 是 $[0,T]\times \R^d$ 上的 Borel 可测函数，我们考虑的如下的随机微分方程(SDE)(\ref{SDDE})和随机控制问题(SCP)(\ref{SCP})：
+\begin{equation}\label{SDDE}
+	\md X_t = b(t,X_t) \md t + \sigma(t,X_t) \md B_t;
+\end{equation}
+\begin{equation}\label{SCP}
+	\md X_t = b(t,X_t,\omega) \md t + \sigma(t,X_t,\omega) \md B_t.\
+\end{equation}
+我们的文章主要关心 (\ref{SDDE}) 的数值解法，对于特定类型的 (\ref{SCP}) 问题，也会简单介绍其求解方法. 
+
+因为随机微分方程求解的困难，在理论研究的过程中，我们会将问题(\ref{SDDE})进一步简化为自治随机常微分方程
+\begin{equation}\label{SODE}
+	%\left\{\begin{array}{l}
+	\md X(t) = b(X(t)) \md t+\sigma(X(t)) \md B_{t}, \quad 0<t \leq T 
+	%X(0)=X_{0}
+	%\end{array}\right.
+\end{equation}
+这类自治系统可以通过转移半群来表述. 
+
+
+\begin{remark}
+	在一些文献\cite{SG1,SG2,ref_parareal}的论述中，使用 Stratonovich 意义的SDE：
+	\[
+	\md X_t = f(t,X_t) \md t + g(t,X_t) \circ \md B_t,
+	\]
+	其用 \ito 方式表述，为
+	\[
+	\md X = \left(f(t,X_t) + \frac12 D g(t,X_t) g(t,X_t)\right) \md t + g(t,X_t) \md B_t.
+	\]
+\end{remark}
+
+
+\begin{definition}[SDE的强解]
+	初始状态为 $t$ 的向量可测过程 $X = (X^1,\cdots,X^d)$ 的 SDE(\ref{SDDE}) 若满足：
+	\[
+	\int_{t}^{s}\left|b\left(u, X_{u}\right)\right| \md u+\int_{t}^{s}\left|\sigma\left(u, X_{u}\right)\right|^{2} \md u<\infty, \quad a . s ., \forall t \leq s \in T. 
+	\]
+	则强解满足如下关系式：
+	\[
+	X_s = X_t + \int_t^s b(u,X_u) \md u + \int_t^s \sigma(u,X_u) \md B_u,\qquad t\le s \le T.
+	\]
+	或者满足如下的分量关系式：
+	\[
+	X_{s}^{i}=X_{t}^{i}+\int_{t}^{s} b_{i}\left(u, X_{u}\right) \md u+\sum_{j=1}^{d} \int_{t}^{s} \sigma_{i j}\left(u, X_{u}\right) \md B_{u}^{j}, \quad t \leq s \in \mathbb{T}, 1 \leq i \leq d
+	\]
+\end{definition}
+注意到 SDE 的强解是一个连续的随机过程. SDE问题(\ref{SDDE})需要满足相应的 Lipschitz条件和增长条件，才能保证强解的存在唯一性. 
+
+\begin{assump*}[A]
+	存在常数 $K$ 和实值随机过程 $\kappa$，使得对任意 $t\in [0,T],\quad \omega \in \Omega, x,y,\in \R^n$，有
+	\begin{equation}\label{assumeA-1}
+		\begin{aligned}
+			|b(t,x,\omega) - b(t,y,\omega)|+|\sigma(t,x,\omega)-\sigma(t,y,\omega)| \le & K|x-y| \\
+			|b(t,x,\omega)|+|\sigma(t,x,\omega)| \le & \kappa_t(\omega) + K|x|,
+		\end{aligned}
+	\end{equation}
+	且
+	\begin{equation}\label{assumeA-2}
+		E \left[ \int_0^T |\kappa_u|^2 \md u \right] < \infty ,\qquad \forall  ~ t\in [0,T].
+	\end{equation}
+\end{assump*}
+
+\begin{theorem}[强解的存在唯一性]
+	当满足条件(\ref{assumeA-1})和(\ref{assumeA-2})时，SDE(\ref{SDDE})在任意时间 $t$ 存在强解. 进一步地，对任意 $\mF_t$ 可测随机变量 $\xi$，若存在某个 $p>1$，使得 $E|\xi|^p < \infty$，则对从时间 $t$ 开始的SDE，即 $X_t=\xi$，所以强解都是不可区分的，即对于任意两个强解 $X$ 和 $Y$，$P[X_s=Y_s,\forall~ t\le s < T]=1$. 同时，该强解还是 $p$方可积的：对任意 $t<T$，存在常数 $C_{_T}$，使得
+	\[
+	E\left[\sup _{t \leq s \leq T}\left|X_{s}\right|^{p}\right] \leq C_{_T}\left(1+E\left[|\xi|^{p}\right]\right)
+	\]
+\end{theorem}
+
+该结果是随机SDE中的标准结论，证明可以见 Gihman 的著作\cite{book_ref_GI}、Ikeda 的著作\cite{book_ref_NI}、Krylo的著作\cite{book_ref_NVK}或Protter的著作\cite{book_ref_PP}
+SDE中另一个重要的结论是对 Fokker-Planck 方程研究而导出的Feynman-Kac公式：
+
+
+\iffalse 
+\begin{definition}[SDE的弱解]
+	
+\end{definition}
+
+\begin{theorem}[弱解的存在唯一性]
+	
+\end{theorem}
+\fi
+
+
+
+\begin{theorem}[Feynman-Kac表示]
+	令 $v\in C^{1,2}([0,T]\times \R^d) \cap C^0([0,T] \times \R^d)$ 关于 $x$ 的导数有界，则柯西问题的解存在. 且 $v$ 存在如下表示：
+	\[
+	v(t, x)=E\left[\int_{t}^{T} e^{-\int_{t}^{s} r\left(u, X_{u}^{t, x}\right) \md u} b\left(s, X_{s}^{t, x}\right) \md s+e^{-\int_{t}^{T} r\left(u, X_{u}^{t, x}\right) \md u} \sigma \left(X_{T}^{t, x}\right)\right]
+	\]
+	$\forall ~ (t,x) \in [0,T] \times \R^d$.
+\end{theorem}
+
+
+
+
+
+
+
+
+

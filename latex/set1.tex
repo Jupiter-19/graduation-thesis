@@ -1,0 +1,167 @@
+% !TEX program = xelatex
+
+
+%论文分类号
+\renewcommand{\zjuclass}{TM888} 
+
+%论文密级
+\renewcommand{\zjusecurity}{}
+
+\renewcommand{\zjutitlec}{带守恒量的自治随机微分方程}%中文论文题目
+\renewcommand{\zjutitlecb}{的数值解研究}%中文论文题目第二行,若无请留空
+\renewcommand{\zjutitlecc}{}%中文论文题目第三行,若无请留空
+\renewcommand{\zjutitlee}{Numerical Study of Stochastic Autonomous}%英文论文题目
+\renewcommand{\zjutitleeb}{Differential Equations with Conserved Quantities}%英文论文题目第二行,若无请留空
+\renewcommand{\zjutitleec}{}%英文论文题目第三行,若无请留空
+
+
+%作者姓名
+\renewcommand{\zjuauthor}{张少杰} 
+
+%作者学号
+\renewcommand{\zjuauthorid}{21835030}
+
+%指导教师 
+\renewcommand{\zjumentor}{程晓良 教授}
+
+%合作导师（如果有的话请取消注释）
+%\renewcommand{\zjumentorco}{}
+
+%专业名称
+\renewcommand{\zjumajor}{计算数学}
+
+%研究方向
+\renewcommand{\zjusubject}{随机微分方程数值解}
+
+%所在学院
+\renewcommand{\zjuschool}{数学科学学院}
+
+%提交日期
+\renewcommand{\zjuapprovaldate}{二〇二一年一月}
+
+%答辩日期
+\renewcommand{\zjudefencedatec}{} % 二〇二一年三月}
+\renewcommand{\zjudefencedatee}{} % March 2020}
+
+%论文评阅人（格式：姓名 ~ 职称 ~ 单位）
+\renewcommand{\zjurevieweronec}{}
+\renewcommand{\zjurevieweronee}{}
+
+\renewcommand{\zjureviewertwoc}{}
+\renewcommand{\zjureviewertwoe}{}
+
+\renewcommand{\zjureviewerthreec}{}
+\renewcommand{\zjureviewerthreee}{}
+
+\renewcommand{\zjureviewerfourc}{}
+\renewcommand{\zjureviewerfoure}{}
+
+\renewcommand{\zjureviewerfivec}{}
+\renewcommand{\zjureviewerfivee}{}
+
+%答辩委员会（姓名\职称\单位）
+\renewcommand{\zjucommitteemainc}{}
+\renewcommand{\zjucommitteemaine}{}
+
+\renewcommand{\zjucommitteeonec}{}
+\renewcommand{\zjucommitteeonee}{}
+
+\renewcommand{\zjucommitteetwoc}{}
+\renewcommand{\zjucommitteetwoe}{}
+
+\renewcommand{\zjucommitteethreec}{}
+\renewcommand{\zjucommitteethreee}{}
+
+\renewcommand{\zjucommitteefourc}{}
+\renewcommand{\zjucommitteefoure}{}
+
+\renewcommand{\zjucommitteefivec}{}
+\renewcommand{\zjucommitteefivee}{}
+
+%\renewcommand{\zjurevieweronec}{陈某某 ~ 教授 ~ XX大学}
+%\renewcommand{\zjurevieweronee}{Moumou Chen ~Prof. ~XX University}
+
+%\renewcommand{\zjureviewertwoc}{张某某 ~ 教授 ~ XX大学}
+%\renewcommand{\zjureviewertwoe}{Moumou Zhang ~Prof. ~XX University}
+
+%\renewcommand{\zjureviewerthreec}{李某某 ~ 教授 ~ XX大学}
+%\renewcommand{\zjureviewerthreee}{Moumou Li ~Prof. ~XX University }
+
+%\renewcommand{\zjureviewerfourc}{吴某某 ~ 教授 ~ XX大学}
+%\renewcommand{\zjureviewerfoure}{Moumou Wu ~Prof. ~XX University}
+
+%\renewcommand{\zjureviewerfivec}{杨某某 ~ 教授 ~ XX大学}
+%\renewcommand{\zjureviewerfivee}{Moumou Yang ~Prof. ~XX University}
+
+%答辩委员会（姓名\职称\单位）
+%\renewcommand{\zjucommitteemainc}{郑某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteemaine}{Moumou Zheng~ Prof. ~Zhejiang University}
+
+%\renewcommand{\zjucommitteeonec}{郑某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteeonee}{Moumou Zheng ~Prof. ~Zhejiang University}
+
+%\renewcommand{\zjucommitteetwoc}{刘某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteetwoe}{Moumou Liu ~Prof. ~Zhejiang University}
+
+%\renewcommand{\zjucommitteethreec}{程某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteethreee}{Moumou Chen ~Prof. ~Zhejiang University}
+
+%\renewcommand{\zjucommitteefourc}{杨某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteefoure}{Moumou Yang ~Prof. ~Zhejiang University}
+
+%\renewcommand{\zjucommitteefivec}{吴某某 ~ 教授 ~ 浙江大学}
+%\renewcommand{\zjucommitteefivee}{Moumou Wu ~Prof. ~Zhejiang University}
+
+
+
+% 添加代码格式
+
+% 代码框(matlab)
+\lstdefinestyle{styleM}{
+	language=Matlab,
+	numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, % 设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, % 设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+	numberstyle=\small
+}
+
+%代码框(python)
+\lstdefinestyle{styleP}{
+	language=Python,
+	numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, % 设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, % 设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+	numberstyle=\small
+}
+
+%代码框(R)
+\lstdefinestyle{styleR}{
+	language=R,
+	numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	%breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+}

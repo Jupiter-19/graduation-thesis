@@ -1,0 +1,102 @@
+% !TEX program = xelatex
+\documentclass[oneside,master]{zjuthesis}
+% 默认为单面模式，如需打印请把oneside换为twoside，博士请将master换为doctor
+%==============================================================
+% 添加包
+\usepackage[ruled]{algorithm2e} % 新算法包
+\usepackage{multirow}   % 表格合并
+\usepackage{listings}   % 代码框
+\usepackage{subfigure}  % 子图
+%\usepackage{caption}    % 图片不标号，报错无法解决
+\usepackage{enumerate}
+\usepackage[perpage,symbol]{footmisc}
+\setfnsymbol{wiley}
+\usepackage{hypbmsec}
+\usepackage{dsfont}
+\usepackage{xcolor}
+\usepackage{framed} % shaded 框
+	\definecolor{shadecolor}{gray}{0.95}
+	
+\usepackage{natbib}
+%\usepackage[colorlinks=false,linkcolor=red,anchorcolor=blue,citecolor=red]{hyperref}
+
+%  自定义符号
+\renewcommand{\proofname}{{\heiti 证明}}
+
+\newcommand{\md}{\text{ d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\mL}{\mathcal{L}}
+\newcommand{\mH}{\mathcal{H}}
+\newcommand{\mB}{\mathcal{B}}
+\newcommand{\mF}{\mathcal{F}}
+\newcommand{\ito}{It$\hat{\mathrm{o}}$}
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+%==============================================================
+\iffalse 
+	我的注释
+	1. 注释包 hyperref
+	2. 取消对目录中的 \addtocontents{toc} 的注释
+	%3. 取消对 'set2.tex' 的注释
+	%4. 取消对 作者简介 的注释
+	5. 检查参考文献是否重复、有无格式错误
+\fi 
+
+%==============================================================
+\begin{document}
+
+\input{set1.tex} %这部分是论文封面、题名页需要的信息
+\xiaosi 
+
+
+%\iffalse
+\input{set2.tex}
+
+\tableofcontents
+\addtocontents{toc}{\protect\chaptermark{目录}}
+\addtocontents{toc}{\protect\contentsline {chapter}{\protect\makebox[\linewidth]{目录\hfill}\vspace{-2em}}{}}
+\mainmatter
+
+
+
+%==============================================================
+% 正文部分
+  \input{chapters/chapter1} % 引言
+  \input{chapters/chapter2} % 预备知识
+  \input{chapters/chapter3} % SDE的解与数值解法
+  \input{chapters/chapter4} % 解的长时间特性
+  \input{chapters/chapter5} % 带守恒量的SDE的数值解法
+  \input{chapters/chapter6} % 数值实验
+  \input{chapters/chapter7} % 总结与展望
+
+%\fi
+%==============================================================
+
+%\iffalse
+  \backmatter %结束章节自动编号
+
+%参考文献（习惯使用bibtex的可以修改）
+  \addcontentsline{toc}{chapter}{参考文献} % 解决目录中没有相应的参考文献的条目问题
+  \chaptermark{参考文献}
+  %\input{chapters/bib}
+ 
+  \nocite{*}
+  \bibliographystyle{plain} % siam , abbrv , plain zjuthesis.cls - 参考文献样式
+  %\bibliography{chapters/bib}
+  
+  \bibliography{chapters/Ref}
+  
+
+%附录
+   \include{chapters/appe}
+
+% 出版物
+   % \input{chapters/publication}
+
+% 作者简历
+  \input{chapters/resume}
+
+%\fi
+
+\end{document}

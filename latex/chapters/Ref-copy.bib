@@ -1,0 +1,565 @@
+% !TeX encoding = UTF-8
+
+% 预备知识 + 随机控制问题 第二章主要文献
+@book{book1,
+	author      = {Huyen Pham},
+	title       = {Continuous-time stochastic control and optimization with financial applications},
+	publisher   = {Springer},
+	year        = {2009}
+}
+% 误差估计文献1 第三章主要文献
+@book{book_error,
+	author      = {Grigori Noah Milstein},
+	title       = {Numerical integration of stochastic differential equations},
+	publisher   = {Springer},
+	year        = {1995}
+}
+% 误差估计文献2 第三章主要文献
+@book{book_error_2,
+	author      = {Grigori Noah Milstein and Michael Tretyakov},
+	title       = {Stochastic numerics for mathematical physics},
+	publisher   = {Springer},
+	year        = {2004}
+}
+% Runge_kutta 第三章主要文献
+@book{book_kutta,
+	author      = {Andreas R{\"o}{$\beta$}ler},
+	title       = {Runge-Kutta methods for the numerical solution of Stochastic differential equations},
+	publisher   = {Shaker Verlag},
+	year        = {2003}
+}
+% 谱方法文献：gPC 第三章主要文献
+@book{book_buqueding,
+	author      = {Dongbin Xiu},
+	title       = {Numerical methods for stochastic computations: a spectral method approach},
+	publisher   = {Princeton university press},
+	pages       = {68--77},
+	year        = {2010}
+}
+% 分数阶问题，有限元方法，Wong-Zakai逼近  第三章主要文献
+@article{SEE,
+	author      = {Yanzhao Cao and Jialin Hong and Zhihui Liu},
+	title       = {Approximating stochastic evolution equations with additive white and rough noises},
+	year        = {2017}
+}
+% 隐Taylor方法
+@article{Implicit_Taylor,
+	author      = {Tianhai Tian and Kevin Burrage},
+	title       = {Implicit Taylor methods for stiff stochastic differential equations},
+	journal     = {Applied Numerical Mathematics},
+	volume      = {38},
+	pages       = {167--185},
+	year        = {2001}
+}
+% Fokker-Planck 方程，稳定解 第四章主要文献
+@article{Fokker_Planck,
+	author      = {Min Ji and Zhongwei Shen and Yingfei Yi},
+	title       = {Convergence to equilibrium in Fokker-Planck equations},
+	journal     = {Journal of Dynamics and Differential Equations},
+	volume      = {31},
+	pages       = {1591--1615},
+	year        = {2019}
+}
+% 守恒量方法SG文献1 第五章主要文献
+@article{SG1,
+	author      = {Jialin Hong and Shuxing Zhai and Jingjing Zhang},
+	title       = {Discrete gradient approach to stochastic differential equations with a conserved quantity},
+	journal     = {SIAM},
+	volume      = {49},
+	number      = {5},
+	pages       = {2017--2038},
+	year        = {2011}
+}
+
+% 守恒量方法SG文献2 第五章主要文献
+@article{SG2,
+	author      = {Weien Zhou and Liying Zhang and Jialin Hong and Songhe Song},
+	title       = {Projection method for stochastic differential equations with conserved quantities},
+	journal     = {BIT Numer Math},
+	volume      = {56},
+	pages       = {1497--1518},
+	year        = {2016}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 守恒量并行算法文献
+@article{ref_parareal,
+	author      = {Liying Zhang and Weien Zhou and Lihai Ji},
+	title       = {Parareal algorithms applied to stochastic differential equations with conserved quantities},
+	journal     = {Journal of Computational Mathematics},
+	volume      = {37},
+	pages       = {48-60},
+	year        = {2019}
+}
+% 随机积分表
+@article{integer,
+	author      = {Norhayati Rosli and Noor Amalina Nisa Ariffin},
+	title       = {Derivation of stochastic Taylor methods for stochastic differential equations},
+	journal     = {MJFAS},
+	volume      = {13},
+	number      = {3},
+	pages       = {159--164},
+	year        = {2017}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% McKean-Vlasov 方程，谱方法
+@article{Projected,
+	author      = {Denis Belomestny and John Schoenmakers},
+	title       = {Projected particle methods for solving McKean-Vlasov stochastic differential equations},
+	journal     = {SIAM},
+	volume      = {56},
+	number      = {6},
+	pages       = {3169--3195},
+	year        = {2018}
+}
+% semi-group 文献1
+@article{semi_group_1,
+	author      = {R. Z. Khas'minskii},
+	title       = {Ergodic properties of recurrent diffusion processes and stabilization of the solution to the cauchy problem for parabolic equations},
+	journal     = {Theory of probability and its applications},
+	volume      = {V},
+	number      = {2},
+	year        = {1960}
+}
+% semi-group 文献2
+@book{semi_group_2,
+	author      = {Rafail Khasminskii},
+	title       = {Stochastic stability of differential equations},
+	publisher   = {Springer-Verlag},
+	year        = {2012}
+}
+% Wong-Zakai逼近 相关论文
+@article{paper_WongZakai,
+	author      = {Martin Hairer and Etienne Pardoux},
+	title       = {A Wong-Zakai theorem for stochastic PDEs},
+	journal     = {J. Math. Soc. Japan},
+	volume      = {67},
+	number      = {4},
+	pages       = {1551--1604},
+	year        = {2015}
+}
+% OU方程 参数估计
+@article{OUequation,
+	author      = {El Mehdi Haress and Yaozhong Hu},
+	title       = {Estimation of all parameters in the fractional Ornstein-Uhlenbeck model under discrete observations},
+	year        = {2020}
+}
+% 隐Taylor方法 参考文献1
+@article{Implicit_Taylor_1,
+	author      = {Grigori Noah Milstein},
+	title       = {Approximate Integration of Stochastic Differential Equations},
+	journal     = {Theory Probab. Appl.},
+	volume      = {19},
+	pages       = {557--562},
+	year        = {1978}
+}
+% 隐Taylor方法 参考文献2
+@book{Implicit_Taylor_2,
+	author      = {Peter Kloeden and Eckhard Platen},
+	title       = {Numerical solution of stochastic differential equations},
+	publisher   = {Springer Berlin},
+	year        = {1992}
+}
+% Runge_kutta 文献1
+@article{kutta_1,
+	author      = {Jialin Hong and Dongsheng Xu and Peng Wang},
+	title       = {Preservation of quadratic invariants of stochastic differential equations via Runge–Kutta methods},
+	journal     = {Applied Numerical Mathematics},
+	volume      = {87},
+	pages       = {38--52},
+	year        = {2015}
+}
+% Runge_kutta 文献2
+@article{kutta_2,
+	author      = {Grigori Noah Milstein and Yu. M. Repin and Michael Tretyakov},
+	title       = {Numerical methods for stochastic systems preserving symplectic structure},
+	journal     = {SIAM},
+	volume      = {40},
+	pages       = {1583--1604},
+	year        = {2002}
+}
+% Runge_kutta 文献3
+@article{kutta_3,
+	author      = {A. Tocino},
+	title       = {Mean-square stability of second-order Runge-Kutta methods for stochastic differential equations},
+	journal     = {Journal of Computational and Applied Mathematics},
+	volume      = {175},
+	pages       = {355--367},
+	year        = {2005}
+}
+% Runge_kutta 文献4
+@article{kutta_4,
+	author      = {Sadegh Amiri and Mohammad Hosseini},
+	title       = {A class of balanced stochastic Runge-Kutta methods for stiff SDE systems},
+	journal     = {Numerical Algorithms},
+	volume      = {69},
+	pages       = {531--552},
+	year        = {2015}
+}
+% Runge_kutta 文献5
+@article{kutta_5,
+	author      = {Kristian Debrabant and Andreas R{\"o}{$\beta$}ler},
+	title       = {Families of efficient second order Runge–Kutta methods for the weak approximation of Itô stochastic differential equations},
+	journal     = {Applied Numerical Mathematics},
+	volume      = {59},
+	pages       = {Issue 3-4},
+	year        = {2009}
+}
+% Runge_kutta 文献6(Hamilton)
+@article{kutta_6,
+	author      = {Weien Zhou and Jingjing Zhang and Jialin Hong and Songhe Song},
+	title       = {Stochastic symplectic Runge-Kutta methods for the strong approximation of Hamiltonian systems with additive noise},
+	journal     = {Journal of Computational and Applied Mathematics},
+	volume      = {325},
+	pages       = {134--148},
+	year        = {2017}
+}
+% Runge_kutta 文献7(Hamilton)
+@article{kutta_7,
+	author      = {Chuchu Chen and Jialin Hong  and Lihai Ji},
+	title       = {Runge-Kutta semidiscretizations for stochastic maxwell equations with additive noise},
+	journal     = {SIAM},
+	volume      = {57},
+	number      = {2},
+	pages       = {702--727},
+	year        = {2019}
+}
+% Runge_kutta 文献8(Hamilton)
+@article{kutta_8,
+	author      = {Peng Wang and Jialin Hong and Dongsheng Xu},
+	title       = {Construction of Symplectic Runge-Kutta Methods for stochastic Hamiltonian systems},
+	journal     = {Commun. Comput. Phys.},
+	volume      = {21},
+	number      = {1},
+	pages       = {237--270},
+	year        = {2017}
+}
+% Runge_kutta 文献9(Hamilton)
+@article{kutta_9,
+	author      = {Jialin Hong and Chun Li},
+	title       = {Multi-symplectic Runge-Kutta methods for nonlinear Dirac equations},
+	journal     = {Comput. Phys.},
+	volume      = {211},
+	pages       = {448--47},
+	year        = {2006}
+}
+% 裂步随机Milstein方法
+@article{ref_randomized_milstein,
+	author      = {Raphael Kruse and Yue Wu},
+	title       = {A randomized milstein method for stochastic differential equations with non-differentiable drift coefficients},
+	journal     = {Discrete and Continuous Dynamical Systems},
+	volume      = {24},
+	number      = {8},
+	pages       = {3475-3502},
+	year        = {2019}
+}
+% 数值算法：Euler_Maruyama，分段连续情况
+@article{ref_Euler_Maruyama,
+	author      = {Yidan Geng and Minghui Song and Yulan Lu and Mingzhu Liu},
+	title       = {Convergence and stability of the truncated Euler-Maruyama method for stochastic differential equations with piecewise continuous arguments},
+	journal     = {Numer. Math.},
+	volume      = {14},
+	pages       = {194-218},
+	year        = {2020}
+}
+}
+% 分数阶等距公式   
+@article{ito_isometry,
+	author      = {Xavier Bardina and Maria Jolis},
+	title       = {Multiple fractional integral with Hurst parameter less than $\frac12$},
+	journal     = {Stochastic Processes and their Applications},
+	volume      = {116},
+	pages       = {463--479},
+	year        = {2006}
+}
+% 带跳随机微分方程 背景文献1
+@book{book_jump1,
+	author      = {Eckhard Platen and Nicola Bruti-Liberati},
+	title       = {NumericalsSolution of stochastic differential equations with jumps in finance},
+	publisher   = {Springer},
+	year        = {2010}
+}
+% 带跳随机微分方程 背景文献2
+@article{book_jump2,
+	author      = {Nicola Bruti-Liberati and Eckhard Platen},
+	title       = {Strong approximations of stochastic differential equations with jumpst},
+	journal     = {J. Comput. Appl. Math},
+	volume      = {205},
+	pages       = {982--1001},
+	year        = {2007}
+}
+% 爱因斯坦 背景文献1
+@article{Einstein,
+	author      = {Albert Einstein},
+	title       = {On the movement of small particles suspended in a stationary liquid demanded by the molecular-kinetic theory of heat},
+	journal     = {Annalen der Physik},
+	volume      = {17},
+	pages       = {549--560},
+	year        = {1905}
+}
+% 爱因斯坦 背景文献2
+@article{Einstein2,
+	author      = {Albert Einstein},
+	title       = {Investigations on the theory of the Brownian movement(Ed. R. Furth)},
+	journal     = {Dover, New York},
+	year        = {1956}
+}
+% 柯尔莫哥洛夫 背景介绍
+@article{Kolmogoroff,
+	author      = {Andrey Nikolaevich Kolmogorov},
+	title       = {$\ddot{\mathrm U}$ber die analytischen Methoden in der Wahrscheinlichkeitsrechnung},
+	journal     = {Mathematische Annalen},
+	volume      = {104},
+	pages       = {415--458},
+	year        = {1931}
+}
+% 流体力学的例子
+@article{paper_SDE_example_1,
+	author      = {G. De Fabritiis and M. Serrano and P. Espanol and P.V. Coveney},
+	title       = {Efficient numerical integrators for stochastic models},
+	journal     = {Physica A},
+	volume      = {361},
+	pages       = {429--440},
+	year        = {2006}
+}
+% 强解唯一性文献1
+@book{book_ref_GI,
+	author      = {Gihman Iosif and Skorohod Anatolij},
+	title       = {Stochastic differential equations},
+	publisher   = {PSpringer-Verlag},
+	year        = {1972}
+}
+% 强解唯一性文献2
+@book{book_ref_NI,
+	author      = {Nobuyuki Ikeda and Shinzo Watanabe},
+	title       = {Stochastic differential equations and diffusion Processes},
+	publisher   = {North-Holland},
+	year        = {1981}
+}
+% 强解唯一性文献3
+@book{book_ref_NVK,
+	author      = {Nikolai Vladimirovich Krylov and  A.B. Aries},
+	title       = {Controlled Diffusion Processes},
+	publisher   = {Springer-Verlag},
+	year        = {2008}
+}
+% 强解唯一性文献4
+@book{book_ref_PP,
+	author      = {Philip E. Protter},
+	title       = {Stochastic Integration and Differential Equations},
+	publisher   = {Springer-Verlag},
+	year        = {2004}
+}
+% 背景介绍文献  随机教材
+@book{book_suiji,
+	author      = {苏中根},
+	title       = {随机过程},
+	publisher   = {高等教育出版社},
+	year        = {2016}
+}
+% 背景介绍文献 金融数学
+@book{book_finance,
+	author      = {Joseph Stampfli and Victor Goodman},
+	title       = {金融数学},
+	publisher   = {机械工业出版社},
+	pages       = {99--110},
+	year        = {2008}
+}
+% 背景介绍文献 数学指南
+@book{book_princeton,
+	author      = {Timothy Gowers},
+	title       = {普林斯顿数学指南(第二卷)},
+	publisher   = {科学出版社},
+	pages       = {540--556},
+	year        = {2014}
+}
+% 背景介绍文献 随机金融分析
+@book{book_fenxi,
+	author      = {A. H. 施利亚耶夫},
+	title       = {随机金融基础(第一卷)事实.模型},
+	publisher   = {高等教育出版社},
+	year        = {1991}
+}
+% 倒向随机微分方程
+@article{ref_psg,
+	author      = {彭实戈},
+	title       = {倒向随机微分方程及其应用},
+	journal     = {数学进展},
+	volume      = {26},
+	number      = {5},
+	pages       = {97--112},
+	year        = {1997}
+}
+% 综述文献4
+@book{zongshu4,
+	author      = {Ernst Hairer and Christian Lubich and Gerhard Wanner},
+	title       = {Geometric numerical integration: structure-preserving algorithms for ordinary differential equations},
+	publisher   = {Springer-Verlag, Berlin},
+	year        = {2002}
+}
+% 综述文献5
+@article{zongshu5,
+	author      = {Henri Schurz},
+	title       = {Numerical regularization for SDEs: construction of nonnegative solutions},
+	journal     = {Syst. Appl.},
+	volume      = {5},
+	pages       = {323--352},
+	year        = {1996}
+}
+% 综述文献6
+@article{zongshu6,
+	author      = {Henri Schurz},
+	title       = {Preservation of probabilistic laws through Euler methods for Ornstein-Uhlenbeck process},
+	journal     = {Stochastic Anal. Appl.},
+	volume      = {17},
+	pages       = {463--486},
+	year        = {1999}
+}
+% 综述文献7
+@article{zongshu7,
+	author      = {Henri Schurz},
+	title       = {The invariance of asymptotic laws of linear stochastic systems under discretization},
+	journal     = {Z. Angew. Math. Mech.},
+	volume      = {79},
+	pages       = {375--382},
+	year        = {1999}
+}
+% 综述文献12
+@article{zongshu12,
+	author      = {Malham and Simon and Wiese Anke},
+	title       = {Stochastic Lie group integrators},
+	journal     = {SIAM J. Sci. Comput.},
+	volume      = {30},
+	pages       = {597--617},
+	year        = {2008}
+}
+% 综述文献14
+@article{zongshu14,
+	author      = {Aslaug H.Strømmen Melbø and Desmond J. Higham},
+	title       = {Numerical simulation of a linear stochastic oscillator with additive noise},
+	journal     = {Appl. Numer. Math.},
+	volume      = {51},
+	pages       = {89--99},
+	year        = {2004}
+}
+% 综述文献16
+@article{zongshu16,
+	author      = {Grigori Noah Milstein and Yu. M. Repin and Michael Tretyakov},
+	title       = {Symplectic integration of Hamiltonian systems with additive noise},
+	journal     = {SIAM J. Numer. Anal.},
+	volume      = {39},
+	pages       = {2066--2088},
+	year        = {2002}
+}
+% 综述文献17
+@article{zongshu17,
+	author      = {Grigori Noah Milstein and Yu. M. Repin and Michael Tretyakov},
+	title       = {Numerical methods for stochastic systems preserving symplectic structure},
+	journal     = {SIAM J. Numer. Anal.},
+	volume      = {40},
+	pages       = {1583--1604},
+	year        = {2002}
+}
+% 综述文献18
+@article{zongshu18,
+	author      = {Tetsuya Misawa},
+	title       = {Energy conservative stochastic diffference scheme for stochastic Hamilton dynamical systems},
+	journal     = {Japan J. Indust. Appl. Math.},
+	volume      = {17},
+	pages       = {119--128},
+	year        = {2000}
+}
+% 综述文献19
+@article{zongshu19,
+	author      = {Tetsuya Misawa},
+	title       = {Conserved quantities and symmetries related to stochastic dynamical systems},
+	journal     = {Ann. Inst. Statist. Math.},
+	volume      = {51},
+	pages       = {779--802},
+	year        = {1999}
+}
+% 综述文献20
+@article{zongshu20,
+	author      = {Tetsuya Misawa},
+	title       = {A Lie algebra approach to numerical integration of stochastic differential equations},
+	journal     = {SIAM J. Sci. Comput.},
+	volume      = {23},
+	pages       = {866--890},
+	year        = {2001}
+}
+% 综述文献21
+@article{zongshu21,
+	author      = {Esteban Moro and Henri Schurz},
+	title       = {Boundary preserving semianalytic numerical algorithms for stochastic differential equations},
+	journal     = {SIAM J. Sci. Comput.},
+	volume      = {29},
+	pages       = {1525--1549},
+	year        = {29}
+}
+% 综述文献25
+@article{zongshu25,
+	author      = {M Thieullen and JC Zambrini},
+	title       = {Probability and quantum symmetries. I. The theorem of Noether in Schrodinger's Euclidean quantum mechanics},
+	journal     = {Ann. Inst. H. Poincar´e},
+	volume      = {67},
+	pages       = {297--338},
+	year        = {1997}
+}
+% 综述文献2-24
+@article{zongshu2-24,
+	author      = {Oxana A. Manita and Stanislav V. Shaposhnikov},
+	title       = {On the Cauchy problem for Fokker–Planck–Kolmogorov equations with potential terms on arbitrary domains},
+	journal     = {Journal of Dynamics and Differential Equations volume},
+	volume      = {28},
+	number      = {2},
+	pages       = {493--518},
+	year        = {2016}
+}
+% 综述文献2-26
+@article{zongshu2-26,
+	author      = {Stanislav V. Shaposhnikov},
+	title       = {On the uniqueness of the probabilistic solution of the Cauchy problem for the Fokker-Planck-Kolmogorov equation},
+	journal     = {Theory of Probability ＆ Its Applications},
+	volume      = {56},
+	number      = {1},
+	pages       = {96--115},
+	year        = {2012}
+}
